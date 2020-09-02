@@ -13,6 +13,6 @@ def create_app():
     with app.app_context():
         from . import routes
         from . import models
-        #import data_loader
+        import data_loader
         db.create_all()
         return app
