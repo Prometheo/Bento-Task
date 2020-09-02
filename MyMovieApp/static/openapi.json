@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "title": "Hello API",
-    "description": "An API to return hello in requested language"
+    "title": "Bento Movies API",
+    "description": "An API to that returns a list of curated movies for users and let them pick and rate."
   },
   "paths": {
     "/api/register": {
