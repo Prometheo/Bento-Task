@@ -8,14 +8,14 @@ from . import db
 @app.route('/', methods=['GET'])
 def home():
     print('getting docs')
-    return redirect('/api/v1')
+    return redirect('/api/v1/swagger')
 
-@app.route('/api/v1', methods=['GET'])
+@app.route('/api/v1/swagger', methods=['GET'])
 def docs():
     print('getting docs')
     return render_template('swaggerui.html')
 
-@app.route('/movies', methods=['GET', 'POST'])
+@app.route('/api/movies', methods=['GET', 'POST'])
 @token_required
 def list_add_movies(current_user):
     if request.method == 'GET':
@@ -26,8 +26,8 @@ def list_add_movies(current_user):
         data_dict = json.loads(data)
 
         movie = data_dict.get('title', '')
-        rating = data_dict.get('my_rating', '')
-        comment = data_dict.get('my_comment', '')
+        rating = data_dict.get('rating', '')
+        comment = data_dict.get('comments', '')
 
         print(rating)
         if not (movie and rating):
@@ -61,7 +61,7 @@ def list_add_movies(current_user):
         return make_response(jsonify(res)), 404
 
 
-@app.route('/my_movies', methods=['GET'])
+@app.route('/api/my_movies', methods=['GET'])
 @token_required
 def list_movie(current_user):
     def serialize(obj):
@@ -80,7 +80,8 @@ def list_movie(current_user):
     lst = current_user.movies_list 
     return jsonify([serialize(movie) for movie in lst])
 
-@app.route('/my_movies/<movie_id>', methods=['PUT','DELETE'])
+@app.route('/api/my_movies/<movie_id>', methods=['PUT','DELETE'])
+
 @token_required
 def update_delete_movie(current_user, movie_id):
     try:
@@ -88,13 +89,12 @@ def update_delete_movie(current_user, movie_id):
     except:
         res = {'message': 'Movie with that id does not exist on your list'}
         return make_response(jsonify(res)), 400
-
     if request.method == 'PUT':
         try:
             data = request.data
         except:
-            res = {'message': 'please enter enter the fields to update'}
-            return make_response(jsonify(res)), 401
+            res = {'message': 'please populate the fields you want to update'}
+            return make_response(jsonify(res)), 403
         print(movie_info)
         data_dict = json.loads(data)
         rating = data_dict.get('rating')
@@ -123,7 +123,7 @@ def update_delete_movie(current_user, movie_id):
 
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def signup_view():
     data = request.data
     userdata_dict = json.loads(data)
@@ -148,7 +148,7 @@ def signup_view():
     return make_response(jsonify(res)), 201
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def signin_view():
     data = request.data
     userdata_dict = json.loads(data)
