@@ -66,7 +66,7 @@
         "summary": "user login",
         "description": "an endpoint that allows user to login",
         "requestBody": {
-          "description": "login user",
+          "description": "login user, and return a jwt Token that should be passed into the authorization header for subsequent requests",
           "required": true,
           "content": {
             "application/json": {
