@@ -1,1 +1,1 @@
-web: gunicorn bento-task.wsgi
+web: gunicorn MyMovieApp.wsgi
