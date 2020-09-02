@@ -26,8 +26,8 @@ def list_add_movies(current_user):
         data_dict = json.loads(data)
 
         movie = data_dict.get('title', '')
-        rating = data_dict.get('rating', '')
-        comment = data_dict.get('comments', '')
+        rating = data_dict.get('my_rating', '')
+        comment = data_dict.get('my_comment', '')
 
         print(rating)
         if not (movie and rating):
@@ -97,8 +97,8 @@ def update_delete_movie(current_user, movie_id):
             return make_response(jsonify(res)), 403
         print(movie_info)
         data_dict = json.loads(data)
-        rating = data_dict.get('rating')
-        comment = data_dict.get('comment')
+        rating = data_dict.get('my_rating')
+        comment = data_dict.get('my_comment')
         if rating:
             movie_info.my_rating = rating
         if comment:

@@ -185,7 +185,7 @@
                     "type": "string",
                     "example": "Thor"
                   },
-                  "My_rating": {
+                  "my_rating": {
                     "type": "number",
                     "example": 6.5
                   }
@@ -266,11 +266,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "My_comment": {
+                  "my_comment": {
                     "type": "string",
                     "example": "saw the movie again, wasnt as bad as i first thought"
                   },
-                  "My_rating": {
+                  "my_rating": {
                     "type": "number",
                     "example": 7.5
                   }
