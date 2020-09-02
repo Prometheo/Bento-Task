@@ -8,9 +8,9 @@ from . import db
 @app.route('/', methods=['GET'])
 def home():
     print('getting docs')
-    return redirect('/api/v1/swagger')
+    return redirect('/api/v1')
 
-@app.route('/api/v1/swagger', methods=['GET'])
+@app.route('/api/v1', methods=['GET'])
 def docs():
     print('getting docs')
     return render_template('swaggerui.html')
