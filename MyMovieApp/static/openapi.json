@@ -1,0 +1,317 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Hello API",
+    "description": "An API to return hello in requested language"
+  },
+  "paths": {
+    "/api/register": {
+      "post": {
+        "tags": [
+          "Register account"
+        ],
+        "summary": "user registration",
+        "description": "an endpoint that allows user to create an account",
+        "requestBody": {
+          "description": "minimal user information to create an account",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "Thor"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "asgard@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "bento2020"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Token": {
+                      "type": "string",
+                      "example": "succesfully registered"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "User Login"
+        ],
+        "summary": "user login",
+        "description": "an endpoint that allows user to login",
+        "requestBody": {
+          "description": "login user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "thor"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Lalal766lao"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Token": {
+                      "type": "string",
+                      "example": "jhygvfd54dedrdrtyu"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "login successful"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid login credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Message": {
+                      "type": "string",
+                      "example": "invalid login credentials"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/movies": {
+      "get": {
+        "tags": [
+          "Get Movies"
+        ],
+        "summary": "Get all movies",
+        "description": "an endpoint that returns the list of movies in the database",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 25
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Thor"
+                    },
+                    "overview": {
+                      "type": "string",
+                      "example": "Thor is locked up in nigeria, who will save?"
+                    },
+                    "popularity": {
+                      "type": "number",
+                      "example": 56.97
+                    },
+                    "rated_18": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Add Movie"
+        ],
+        "summary": "add a movie to personal archive",
+        "requestBody": {
+          "description": "an endpoint to add movies to personal collection",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Thor"
+                  },
+                  "My_rating": {
+                    "type": "number",
+                    "example": 6.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created, Movie added"
+          }
+        }
+      }
+    },
+    "/api/my_movies": {
+      "get": {
+        "tags": [
+          "My Personal Movie Collection"
+        ],
+        "summary": "Get all movies in my personal collection",
+        "description": "an endpoint that returns the list of movies in users personal collection",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 40
+                    },
+                    "movie title": {
+                      "type": "string",
+                      "example": "Logan"
+                    },
+                    "my rating": {
+                      "type": "number",
+                      "example": 8
+                    },
+                    "my comment": {
+                      "type": "string",
+                      "example": "dope movie from my fav!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/my_movies/{movie_id}": {
+      "put": {
+        "tags": [
+          "Update Movie rating"
+        ],
+        "summary": "update a movie's rating",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "movie_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "id of the movie to be updated"
+          }
+        ],
+        "requestBody": {
+          "description": "an endpoint to update a movie's rating in user's collection",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "My_comment": {
+                    "type": "string",
+                    "example": "saw the movie again, wasnt as bad as i first thought"
+                  },
+                  "My_rating": {
+                    "type": "number",
+                    "example": 7.5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Movie Updated."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Delete Movies"
+        ],
+        "summary": "Remove movie from user's personal collection",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "movie_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "id of the movie to be removed"
+          }
+        ],
+        "description": "an endpoint that removes a particular movie from users personal collection",
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

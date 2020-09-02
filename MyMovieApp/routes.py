@@ -1,13 +1,20 @@
-from flask import current_app as app, make_response, request, json, jsonify
+from flask import current_app as app, make_response, request, json, jsonify, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, token_required, Movies, PersonalRating
 from . import db
+
+
 
 @app.route('/<id>', methods=['GET'])
 @token_required
 def home(current_user, id):
     print(id)
     return make_response('Hello {}'.format(current_user.username))
+
+@app.route('/api/swagger', methods=['GET'])
+def docs():
+    print('getting docs')
+    return render_template('swaggerui.html')
 
 @app.route('/api/movies', methods=['GET', 'POST'])
 @token_required
