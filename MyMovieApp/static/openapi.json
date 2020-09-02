@@ -5,8 +5,14 @@
     "title": "Bento Movies API",
     "description": "An API to that returns a list of curated movies for users and let them pick and rate."
   },
+  "servers": [
+    {
+      "url":"https://bento-movies.herokuapp.com/api/v1",
+      "description": "an heroku hosted server for the endpoints"
+    }
+  ],
   "paths": {
-    "/api/register": {
+    "/register": {
       "post": {
         "tags": [
           "Register account"
@@ -46,7 +52,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "Token": {
+                    "Message": {
                       "type": "string",
                       "example": "succesfully registered"
                     }
@@ -58,7 +64,7 @@
         }
       }
     },
-    "/api/login": {
+    "/login": {
       "post": {
         "tags": [
           "User Login"
@@ -126,7 +132,7 @@
         }
       }
     },
-    "/api/movies": {
+    "/movies": {
       "get": {
         "tags": [
           "Get Movies"
@@ -185,7 +191,7 @@
                     "type": "string",
                     "example": "Thor"
                   },
-                  "My_rating": {
+                  "my_rating": {
                     "type": "number",
                     "example": 6.5
                   }
@@ -201,7 +207,7 @@
         }
       }
     },
-    "/api/my_movies": {
+    "/my_movies": {
       "get": {
         "tags": [
           "My Personal Movie Collection"
@@ -240,7 +246,7 @@
         }
       }
     },
-    "/api/my_movies/{movie_id}": {
+    "/my_movies/{movie_id}": {
       "put": {
         "tags": [
           "Update Movie rating"
